@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { ClerkProvider } from '@clerk/nextjs'
 import {dark} from "@clerk/themes";
 import Sidebar from "@/components/sidebar";
-import HeroSection from "@/components/hero-section";
+import { auth } from "@clerk/nextjs/server";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,7 +17,10 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>){
+  const { sessionClaims: user } = auth();
+
+  const isAdmin = user?.metadata.role === "admin"
   return (
   <ClerkProvider appearance={{ baseTheme: dark }}>
     <html lang="en">
@@ -29,7 +32,7 @@ export default function RootLayout({
             disableTransitionOnChange
       >
         <div className="flex flex-row">
-        <Sidebar />
+        <Sidebar isAdmin={isAdmin}/>
             {children}
         </div>
     </ThemeProvider>

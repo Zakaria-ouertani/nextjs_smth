@@ -1,6 +1,5 @@
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-
-import Image from "next/image";
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -12,6 +11,10 @@ import {
 
 
 export default function HomePage() {
+  const { userId } : { userId: string | null } = auth();
+  if (!userId) {
+    redirect("/signup");
+  }
   return (
     <div className="w-full h-full flex flex-col">
       <section className="bg-[url('/images/bgr-img.png')] text-black w-full h-48 flex items-center">

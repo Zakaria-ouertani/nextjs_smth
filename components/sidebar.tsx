@@ -1,41 +1,65 @@
-import Link from "next/link"
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { HomeIcon, DashboardIcon} from '@radix-ui/react-icons'
+"use client";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { HomeIcon, DashboardIcon, StopwatchIcon} from "@radix-ui/react-icons";
+import { usePathname } from "next/navigation";
+import { SignedIn, UserButton} from "@clerk/nextjs";
 
-export default function Sidebar() {
+interface SidebarProps {
+  isAdmin: boolean;
+}
+export default function Sidebar({ isAdmin }: SidebarProps) {
+  const pathname = usePathname();
   return (
     <div className="flex h-screen sticky top-0">
       <div className="w-16 flex flex-col items-center justify-between pt-1">
-         <Popover>
-           <PopoverTrigger asChild>
-             <div className="flex justify-center w-full">
-               <Avatar>
-                 <AvatarImage src="" />
-                 <AvatarFallback>CN</AvatarFallback>
-               </Avatar>
-             </div>
-           </PopoverTrigger>
-           <PopoverContent side="right" className="w-80">
-                Test
-           </PopoverContent>
-        </Popover>
-       <div className="flex items-center h-full">
-         <div  className="flex flex-col items-center justify-center justify-between h-32 w-10 border rounded py-2">
-            <Button  className="w-8 p-0" variant="ghost" asChild>
-                <Link href="/"><HomeIcon/></Link>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+        <div className="flex items-center h-full">
+          <div className="flex flex-col items-center justify-between gap-1 w-10 border rounded py-1">
+            <Button
+              className={`w-8 h-8 p-0 ${ pathname === "/" ? "bg-white text-black" : "" }`}
+              variant="ghost"
+              asChild
+            >
+              <Link href="/">
+                <HomeIcon />
+              </Link>
             </Button>
-            <Button className="w-8 p-0" variant="ghost" asChild>
-                <Link href="/idk"><DashboardIcon/></Link>
+            <Button
+              className={`w-8 h-8 p-0 ${ pathname === "/idk" ? "bg-white text-black" : "" }`}
+              variant="ghost"
+              asChild
+            >
+              <Link href="/idk">
+                <StopwatchIcon />
+              </Link>
             </Button>
-            <Button className="w-8 p-0" variant="ghost" asChild>
-                <Link href="/support"></Link>
+            <Button
+              className={`w-8 h-8 p-0 ${ pathname === "/support" ? "bg-white text-black" : "" }`}
+              variant="ghost"
+              asChild
+            >
+              <Link href="/support">
+                <StopwatchIcon />
+              </Link>
             </Button>
-         </div>
-       </div>
+            {
+              isAdmin && 
+              <Button
+                className={`w-8 h-8 p-0 ${ pathname === "/models" ? "bg-white text-black" : "" }`}
+                variant="ghost"
+                asChild
+              >
+                <Link href="/models">
+                  <DashboardIcon/>
+                </Link>
+              </Button>
+            }
+          </div>
+        </div>
       </div>
-      <div className="flex-1 overflow-auto" />
     </div>
-  )
+  );
 }
