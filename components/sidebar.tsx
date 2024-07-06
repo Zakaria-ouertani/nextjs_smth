@@ -26,8 +26,9 @@ export default function Sidebar({ isAdmin }: SidebarProps) {
         </SignedIn>
         <div className="flex items-center h-full">
           <div className="flex flex-col items-center justify-between gap-1 w-10 border rounded py-1">
-            {buttons.map((button) => (
+            {buttons.map((button, i) => (
                 <Button
+                  key={i}
                   className={`w-8 h-8 p-0 flex items-center justify-center transition-all duration-300 ${
                     pathname === button.href ? "bg-white text-black" : ""
                   } `}

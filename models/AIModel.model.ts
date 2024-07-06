@@ -9,5 +9,5 @@ const AIModelSchema = new mongoose.Schema({
   createdAt: Date,
   updatedAt: Date
 });
-const AIModel = mongoose.models.AIModel || mongoose.model('AIModel', AIModelSchema);
-export default AIModel
+
+export default  mongoose.models.AIModel || mongoose.model('AIModel', AIModelSchema);

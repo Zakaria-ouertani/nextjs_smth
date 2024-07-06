@@ -2,8 +2,12 @@
 import connectToDB from "@/lib/connectToDB";
 import User from "@/models/User.model"
 
+export async function fetchUser(id: String | undefined) {
+  return await User.findOne({id})
+}
+
 export async function addUser(
-  id: String,
+  id: String | undefined,
   name: String | null,
   email: String,
   createdAt: Date,

@@ -12,7 +12,7 @@ export async function fetchImages(userId: String) {
   }
 }
 
-export async function addAIModel(
+export async function addImage(
   url: String,
   user: String,
   createdAt: Date,
@@ -33,7 +33,7 @@ export async function addAIModel(
   }
 }
 
-export async function removeAIModel(imageId: mongoose.Types.ObjectId) {
+export async function removeImage(imageId: mongoose.Types.ObjectId) {
   try {
     await connectToDB();
     Image.findByIdAndDelete(imageId);

@@ -3,7 +3,7 @@ import connectToDB from "@/lib/connectToDB";
 import Image from "@/models/Text.model"
 import mongoose from "mongoose"
 
-export async function fetchImages(userId: String) {
+export async function fetchText(userId: String) {
   try {
     connectToDB();
     return await Image.find({user: userId});
@@ -12,7 +12,7 @@ export async function fetchImages(userId: String) {
   }
 }
 
-export async function addAIModel(
+export async function addText(
   content: String,
   user: String,
   createdAt: Date,
@@ -33,7 +33,7 @@ export async function addAIModel(
   }
 }
 
-export async function removeAIModel(textId: mongoose.Types.ObjectId) {
+export async function removeText(textId: mongoose.Types.ObjectId) {
   try {
     connectToDB();
     Image.findByIdAndDelete(textId);

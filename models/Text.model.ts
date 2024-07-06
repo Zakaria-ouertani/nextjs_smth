@@ -6,5 +6,4 @@ const TextSchema = new mongoose.Schema({
   updatedAt: Date
 });
 
-const Text = mongoose.models.Text || mongoose.model('Text', TextSchema);
-export default Text
+export default  mongoose.models.Text || mongoose.model('Text', TextSchema);
