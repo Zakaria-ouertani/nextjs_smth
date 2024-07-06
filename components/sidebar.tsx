@@ -10,6 +10,14 @@ interface SidebarProps {
 }
 export default function Sidebar({ isAdmin }: SidebarProps) {
   const pathname = usePathname();
+  const buttons = [
+     { href: "/", icon: <HomeIcon />, text: "Home" },
+     { href: "/idk", icon: <StopwatchIcon />, text: "IDK" },
+     { href: "/support", icon: <StopwatchIcon />, text: "Support" }
+   ];
+  if (isAdmin) {
+    buttons.push({href: "/models", icon: <DashboardIcon />, text: "Models"})
+  }
   return (
     <div className="flex h-screen sticky top-0">
       <div className="w-16 flex flex-col items-center justify-between pt-1">
@@ -18,45 +26,20 @@ export default function Sidebar({ isAdmin }: SidebarProps) {
         </SignedIn>
         <div className="flex items-center h-full">
           <div className="flex flex-col items-center justify-between gap-1 w-10 border rounded py-1">
-            <Button
-              className={`w-8 h-8 p-0 ${ pathname === "/" ? "bg-white text-black" : "" }`}
-              variant="ghost"
-              asChild
-            >
-              <Link href="/">
-                <HomeIcon />
-              </Link>
-            </Button>
-            <Button
-              className={`w-8 h-8 p-0 ${ pathname === "/idk" ? "bg-white text-black" : "" }`}
-              variant="ghost"
-              asChild
-            >
-              <Link href="/idk">
-                <StopwatchIcon />
-              </Link>
-            </Button>
-            <Button
-              className={`w-8 h-8 p-0 ${ pathname === "/support" ? "bg-white text-black" : "" }`}
-              variant="ghost"
-              asChild
-            >
-              <Link href="/support">
-                <StopwatchIcon />
-              </Link>
-            </Button>
-            {
-              isAdmin && 
-              <Button
-                className={`w-8 h-8 p-0 ${ pathname === "/models" ? "bg-white text-black" : "" }`}
-                variant="ghost"
-                asChild
-              >
-                <Link href="/models">
-                  <DashboardIcon/>
-                </Link>
-              </Button>
-            }
+            {buttons.map((button) => (
+                <Button
+                  className={`w-8 h-8 p-0 flex items-center justify-center transition-all duration-300 ${
+                    pathname === button.href ? "bg-white text-black" : ""
+                  } `}
+                  variant="ghost"
+                  asChild
+                >
+                  <Link href={button.href} className="flex items-center space-x-2">
+                    {button.icon}
+                  </Link>
+                </Button>
+
+            ))}
           </div>
         </div>
       </div>

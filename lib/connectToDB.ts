@@ -17,15 +17,14 @@ if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };
 }
 
-async function dbConnect() {
+async function connectToDB() {
   if (cached.conn) {
     return cached.conn;
   }
   if (!cached.promise) {
     const opts = {
+      dbName: "test",
       bufferCommands: false,
-      useUnifiedTopology: true,
-      useNewUrlParser: true
     };
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
       return mongoose;
@@ -41,4 +40,4 @@ async function dbConnect() {
   return cached.conn;
 }
 
-export default dbConnect;
+export default connectToDB;
