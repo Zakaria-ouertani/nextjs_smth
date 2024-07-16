@@ -7,8 +7,9 @@ import { SignedIn, UserButton} from "@clerk/nextjs";
 
 interface SidebarProps {
   isAdmin: boolean;
+  hidden: String;
 }
-export default function Sidebar({ isAdmin }: SidebarProps) {
+export default function Sidebar({ isAdmin, hidden }: SidebarProps) {
   const pathname = usePathname();
   const buttons = [
      { href: "/", icon: <HomeIcon />, text: "Home" },
@@ -19,8 +20,8 @@ export default function Sidebar({ isAdmin }: SidebarProps) {
     buttons.push({href: "/models", icon: <DashboardIcon />, text: "Models"})
   }
   return (
-    <div className="flex h-screen sticky top-0">
-      <div className="w-16 flex flex-col items-center justify-between pt-1">
+    <div className={`${hidden} px-3 flex h-screen sticky top-0`}>
+      <div className="flex flex-col items-center justify-between pt-1">
         <SignedIn>
           <UserButton />
         </SignedIn>

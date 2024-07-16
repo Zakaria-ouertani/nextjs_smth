@@ -18,26 +18,32 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>){
+  let hidden = "";
   const { sessionClaims: user } = auth();
-
+  if (!user){
+    hidden = "collapse"
+  }
   const isAdmin = user?.metadata.role === "admin"
+
   return (
-  <ClerkProvider appearance={{ baseTheme: dark }}>
-    <html lang="en">
-      <body className={inter.className}>
-      <ThemeProvider
+    <ClerkProvider appearance={{ baseTheme: dark }}>
+      <html lang="en">
+        <body className={inter.className}>
+          <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
-      >
-        <div className="flex flex-row">
-        <Sidebar isAdmin={isAdmin}/>
-            {children}
-        </div>
-    </ThemeProvider>
-      </body>
-    </html>
-  </ClerkProvider>
+          >
+            <div className="flex">
+              <Sidebar isAdmin={isAdmin} hidden={hidden} />
+              <main className="flex-1">
+                {children}
+              </main>
+            </div>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

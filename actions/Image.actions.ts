@@ -6,7 +6,7 @@ import mongoose from "mongoose"
 export async function fetchImages(userId: String) {
   try {
     await connectToDB();
-    return await Image.find({id: userId});
+    return await Image.find({user: userId});
   } catch (error: any) {
       throw new Error("Failed to fetch Images.");
   }
@@ -20,7 +20,7 @@ export async function addImage(
 ) {
   try {
     await connectToDB();
-    const newImage = await Image.create(
+    await Image.create(
       {
         url,
         user,
