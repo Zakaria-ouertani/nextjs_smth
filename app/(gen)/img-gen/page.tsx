@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export default function Home() {
@@ -69,22 +70,20 @@ export default function Home() {
           />
          <Select name="model">
            <SelectTrigger className="w-[180px]">
-             <SelectValue placeholder="Select a fruit" />
+             <SelectValue placeholder="Select a model" />
            </SelectTrigger>
            <SelectContent>
              <SelectGroup>
-               <SelectLabel>Fruits</SelectLabel>
-               <SelectItem value="apple">Apple</SelectItem>
-               <SelectItem value="banana">Banana</SelectItem>
-               <SelectItem value="blueberry">Blueberry</SelectItem>
-               <SelectItem value="grapes">Grapes</SelectItem>
-               <SelectItem value="pineapple">Pineapple</SelectItem>
+               <SelectLabel>AI Model</SelectLabel>
+               <SelectItem value="stability-ai/sdxl">SDXL</SelectItem>
+               <SelectItem value="stability-ai/stable-diffusion-3">Stable Diffusion 3</SelectItem>
              </SelectGroup>
            </SelectContent>
          </Select>
           <Button type="submit">Go!</Button>
         </form>
 
+      </div>
         {error && <div className="mt-4 text-red-500">{error}</div>}
 
         {prediction && (
@@ -103,7 +102,6 @@ export default function Home() {
             <p className="mt-4 text-lg text-gray-700">status: {prediction.status}</p>
           </div>
         )}
-      </div>
     </main>
   )
 }
