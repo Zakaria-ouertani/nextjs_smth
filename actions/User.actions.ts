@@ -7,8 +7,8 @@ export async function fetchUser(id: String | undefined) {
 }
 
 export async function addUser(
-  id: String | undefined,
-  name: String | null,
+  id: String,
+  name: String,
   email: String,
   createdAt: Date,
   updatedAt: Date
@@ -16,18 +16,18 @@ export async function addUser(
   await connectToDB();
   const newUser = await User.create(
     {
-       id,
-       name,
-       email,
-       createdAt,
-       updatedAt
+       id: id,
+       name: name,
+       email: email,
+       createdAt: createdAt,
+       updatedAt: updatedAt
     }
   )
 }
 
 export async function updateUser(
   id: String,
-  name: String | null,
+  name: String,
   email: String,
   createdAt: Date,
   updatedAt: Date
@@ -36,10 +36,10 @@ export async function updateUser(
   const updatedUser = await User.findOneAndUpdate(
     { id },
     {
-      name,
-      email,
-      createdAt,
-      updatedAt,
+      name: name,
+      email: email,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
     },
     { new: true }
   )

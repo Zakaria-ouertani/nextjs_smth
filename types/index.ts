@@ -7,3 +7,11 @@ export interface ImageProps {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface PricingCardProps {
+  title: string;
+  description: string;
+  price: number;
+  features: string[];
+
+}

@@ -1,13 +1,14 @@
-import { Checkout } from "@/components/component/Checkout"
+"use client"
+import { Checkout } from "@/components/checkout"
 import React from 'react'
+import { useSearchParams } from "next/navigation"
 
-const Page = () => {
+export default async function Page(){
+  const plan = useSearchParams().get("plan")
   return (
     <div>
-      3asba
-      <Checkout />
+      <Checkout plan={plan}/>
     </div>
   )
 }
 
-export default Page

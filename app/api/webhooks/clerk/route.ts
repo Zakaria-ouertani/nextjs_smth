@@ -50,7 +50,7 @@ export async function POST(req: Request) {
   if (evt.type === "user.created") {
     await addUser(
       evt.data.id,
-      evt.data.username,
+      evt.data.username || "",
       evt.data.email_addresses[0].email_address,
       new Date(evt.data.created_at * 1000),
       new Date(evt.data.updated_at * 1000)
@@ -59,7 +59,7 @@ export async function POST(req: Request) {
   else if (evt.type === "user.updated") {
     await updateUser(
       evt.data.id,
-      evt.data.username,
+      evt.data.username || "",
       evt.data.email_addresses[0].email_address,
       new Date(evt.data.created_at * 1000),
       new Date(evt.data.updated_at * 1000)
