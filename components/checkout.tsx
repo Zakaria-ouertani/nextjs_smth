@@ -2,9 +2,11 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
-import fet
+import { fetchSpecificPlan } from "@/actions/PaymentPlans.actions"
 
-export function Checkout({ plan }: { plan: String }) {
+
+export async function Checkout({ plan }: { plan: string }) {
+  const planInfo = await fetchSpecificPlan(plan) 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background">
       <div className="max-w-md w-full bg-card p-6 rounded-lg shadow-lg">
@@ -64,7 +66,7 @@ export function Checkout({ plan }: { plan: String }) {
               <Separator />
               <div className="flex justify-between font-bold">
                 <span>Total</span>
-                <span>$99.99</span>
+                <span>{planInfo.price}</span>
               </div>
             </div>
           </div>
